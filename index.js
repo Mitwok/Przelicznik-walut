@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+  let exchangeRate;
+  let exchangeBid;
+  let exchangeAsk;
+
   axios
     .get("http://api.nbp.pl/api/exchangerates/tables/C")
     .then((response) => response)
@@ -7,6 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(currencyData.map((currency) => currency.currency));
       console.log(currencyData.map((currency) => currency.code));
       console.log(currencyData.map((currency) => currency));
+
+      const ExchangeData = currencyData.find(
+        (item) => item.code === giveCurrency.value
+      );
+      exchangeBid = ExchangeData ? ExchangeData.bid : null;
+      exchangeAsk = ExchangeData ? ExchangeData.ask : null;
     });
 
   const giveInput = document.getElementById("give-input");
@@ -15,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const receiveCurrency = document.getElementById("receive-currency");
   const giveCurrency = document.getElementById("give-currency");
 
-  let exchangeRate = 4.22;
+  exchangeRate = exchangeBid;
 
   receiveInput.placeholder = 100 * exchangeRate;
 
