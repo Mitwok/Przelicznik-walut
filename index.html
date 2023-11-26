@@ -8,7 +8,35 @@
     <link href="/dist/output.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="flex items-center justify-center h-screen">
+    <div>
+        <div class="flex md:flex-row flex-col items-center lg:items-center">
+            <div class="border-2 border-gray-200 p-2 rounded-lg mb-2 md:mr-8">
+                <input id="give-input" class="focus: outline-none" placeholder="100" type="number">
+                <select id="give-currency" class="focus: outline-none focus:border-b-2 focus:border-blue-500"
+                    name="Currency" id="Select">
+                    <option selected value="USD">USD</option>
+                    <option value="PLN">PLN</option>
+                </select>
+            </div>
+            <button id="swap-button"
+                class="md:mr-8 mb-2 rounded-lg border-2 p-2 border-gray-200 focus:outline-none focus:border-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                </svg>
+            </button>
+            <div class="border-2 border-gray-200 p-2 rounded-lg">
+                <input id="receive-input" class="focus: outline-none" placeholder="" type="number">
+                <select id="receive-currency" class="focus: outline-none focus:border-b-2 focus:border-blue-500"
+                    name="Currency" id="Select">
+                    <option selected value="PLN">PLN</option>
+                    <option value="USD">USD</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="index.js"></script>
