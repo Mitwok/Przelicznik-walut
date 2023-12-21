@@ -3,11 +3,26 @@ document.addEventListener("DOMContentLoaded", function () {
   let exchangeBid;
   let exchangeAsk;
 
-  axios
-    .get("http://api.nbp.pl/api/exchangerates/tables/C")
-    .then((response) => response)
+  // axios
+  //   .get("http://api.nbp.pl/api/exchangerates/tables/C")
+  //   .then((response) => response)
+  //   .then((data) => {
+  //     const currencyData = data.data[0].rates;
+  //     console.log(currencyData.map((currency) => currency.currency));
+  //     console.log(currencyData.map((currency) => currency.code));
+  //     console.log(currencyData.map((currency) => currency));
+
+  //     const ExchangeData = currencyData.find(
+  //       (item) => item.code === giveCurrency.value
+  //     );
+  //     exchangeBid = ExchangeData ? ExchangeData.bid : null;
+  //     exchangeAsk = ExchangeData ? ExchangeData.ask : null;
+  //   });
+
+  fetch("http://api.nbp.pl/api/exchangerates/tables/C")
+    .then((response) => response.json())
     .then((data) => {
-      const currencyData = data.data[0].rates;
+      const currencyData = data[0].rates;
       console.log(currencyData.map((currency) => currency.currency));
       console.log(currencyData.map((currency) => currency.code));
       console.log(currencyData.map((currency) => currency));
@@ -25,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const receiveCurrency = document.getElementById("receive-currency");
   const giveCurrency = document.getElementById("give-currency");
 
-  exchangeRate = exchangeBid;
+  exchangeRate = 4.2;
 
   receiveInput.placeholder = 100 * exchangeRate;
 
