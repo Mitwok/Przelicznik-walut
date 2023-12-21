@@ -1,13 +1,44 @@
 document.addEventListener("DOMContentLoaded", function () {
   let exchangeRate;
-  let exchangeBid;
-  let exchangeAsk;
+  const giveInput = document.getElementById("give-input");
+  const receiveInput = document.getElementById("receive-input");
+  const swapButton = document.getElementById("swap-button");
+  const receiveCurrency = document.getElementById("receive-currency");
+  const giveCurrency = document.getElementById("give-currency");
+  const storageData = localStorage.getItem("tableData");
 
-  // axios
-  //   .get("http://api.nbp.pl/api/exchangerates/tables/C")
-  //   .then((response) => response)
+  const updateCurrencies = () => {
+    fetch("http://api.nbp.pl/api/exchangerates/tables/C")
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("tableData", JSON.stringify(data));
+      })
+      .catch((error) => console.error("Ошибка при получении данных:", error));
+  };
+
+  const updateSelector = (selectorName) => {
+    if (storageData) {
+      const tableData = JSON.parse(storageData);
+      const tableCurrency = tableData[0].rates;
+
+      tableCurrency.forEach((element) => {
+        const option = document.createElement("option");
+        option.value = `${element.code}`;
+        option.textContent = `${element.code}`;
+        option.title = `${element.currency}`;
+        selectorName.appendChild(option);
+      });
+    }
+  };
+
+  updateCurrencies();
+  updateSelector(giveCurrency);
+  updateSelector(receiveCurrency);
+
+  // fetch("http://api.nbp.pl/api/exchangerates/tables/C")
+  //   .then((response) => response.json())
   //   .then((data) => {
-  //     const currencyData = data.data[0].rates;
+  //     const currencyData = data[0].rates;
   //     console.log(currencyData.map((currency) => currency.currency));
   //     console.log(currencyData.map((currency) => currency.code));
   //     console.log(currencyData.map((currency) => currency));
@@ -18,27 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
   //     exchangeBid = ExchangeData ? ExchangeData.bid : null;
   //     exchangeAsk = ExchangeData ? ExchangeData.ask : null;
   //   });
-
-  fetch("http://api.nbp.pl/api/exchangerates/tables/C")
-    .then((response) => response.json())
-    .then((data) => {
-      const currencyData = data[0].rates;
-      console.log(currencyData.map((currency) => currency.currency));
-      console.log(currencyData.map((currency) => currency.code));
-      console.log(currencyData.map((currency) => currency));
-
-      const ExchangeData = currencyData.find(
-        (item) => item.code === giveCurrency.value
-      );
-      exchangeBid = ExchangeData ? ExchangeData.bid : null;
-      exchangeAsk = ExchangeData ? ExchangeData.ask : null;
-    });
-
-  const giveInput = document.getElementById("give-input");
-  const receiveInput = document.getElementById("receive-input");
-  const swapButton = document.getElementById("swap-button");
-  const receiveCurrency = document.getElementById("receive-currency");
-  const giveCurrency = document.getElementById("give-currency");
 
   exchangeRate = 4.2;
 
