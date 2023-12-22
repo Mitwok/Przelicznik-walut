@@ -76,12 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const exchangeRateReceive = dataTable[0].rates.find(
         (currency) => currency.code === receiveCurrency.value
       );
-      console.log(exchangeRateReceive);
       const exchangeRateGive = dataTable[0].rates.find(
         (currency) => currency.code === giveCurrency.value
       );
-      console.log(exchangeRateGive);
-      exchangeRate = exchangeRateReceive.bid / exchangeRateGive.ask;
+      exchangeRate = exchangeRateReceive.ask / exchangeRateGive.bid;
     }
   };
 
