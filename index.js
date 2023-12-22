@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const updateCurrencies = () => {
     return new Promise((resolve, reject) => {
-      fetch("http://api.nbp.pl/api/exchangerates/tables/C")
+      fetch("https://api.nbp.pl/api/exchangerates/tables/C")
         .then((response) => response.json())
         .then((data) => {
           dataTable = data;
