@@ -101,6 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
     updatePlaceholder();
   });
 
+  setInterval(() => {
+    updateButton.dispatchEvent(new Event("click"));
+  }, 1000 * 60 * 5);
+
   const changeEvent = () => {
     receiveCurrency.dispatchEvent(new Event("change"));
     giveCurrency.dispatchEvent(new Event("change"));
