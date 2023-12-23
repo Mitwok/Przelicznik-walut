@@ -22,24 +22,26 @@ document.addEventListener("DOMContentLoaded", function () {
             new Date().getHours().toString().padStart(2, "0") +
             ":" +
             new Date().getMinutes().toString().padStart(2, "0");
-          infoRow.textContent = "Last updated at " + dataTime;
-          infoRow.setAttribute("class", "text-gray-400");
+          infoRow.textContent = "Ostatnia aktualizacja o " + dataTime;
+          console.log(infoRow.textContent);
+          infoRow.setAttribute("class", "text-gray-400 mr-2");
           setTimeout(() => {
             spin.setAttribute("class", "w-6 h-6 text-blue-600");
             updateButton.setAttribute("title", "update");
-            updateButton.setAttribute("class", "p-4 cursor-pointer");
+            updateButton.classList.remove("cursor-default");
           }, 1000);
           updateButtonStatus = true;
           resolve();
         })
         .catch((error) => {
           const errorAlert = document.createElement("h1");
-          infoRow.textContent = "Error";
-          infoRow.setAttribute("class", "text-red-500");
+          const lastValue = infoRow.textContent;
+          infoRow.textContent = "Błąd pobierania danych. " + lastValue;
+          infoRow.setAttribute("class", "text-red-500 mr-2");
           setTimeout(() => {
             spin.setAttribute("class", "w-6 h-6 text-blue-600");
             updateButton.setAttribute("title", "update");
-            updateButton.setAttribute("class", "p-4 cursor-pointer");
+            updateButton.classList.remove("cursor-default");
           }, 1000);
           updateButtonStatus = true;
           document.body.appendChild(errorAlert);
@@ -138,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updatePlaceholder();
       spin.setAttribute("class", "animate-spin w-6 h-6 text-gray-400");
       updateButton.setAttribute("title", "updating...");
-      updateButton.setAttribute("class", "p-4 cursor-default");
+      updateButton.classList.add("cursor-default");
       updateButtonStatus = false;
     }
   });
