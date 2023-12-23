@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let exchangeRate = 0;
   let dataTable = {};
+  let dataTime;
 
   const giveInput = document.getElementById("give-input");
   const receiveInput = document.getElementById("receive-input");
@@ -18,12 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           dataTable = data;
-          const dataTime =
+          dataTime =
             new Date().getHours().toString().padStart(2, "0") +
             ":" +
             new Date().getMinutes().toString().padStart(2, "0");
           infoRow.textContent = "Ostatnia aktualizacja o " + dataTime;
-          console.log(infoRow.textContent);
           infoRow.setAttribute("class", "text-gray-400 mr-2");
           setTimeout(() => {
             spin.setAttribute("class", "w-6 h-6 text-blue-600");
@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch((error) => {
           const errorAlert = document.createElement("h1");
-          const lastValue = infoRow.textContent;
-          infoRow.textContent = "Błąd pobierania danych. " + lastValue;
+          infoRow.textContent =
+            "Błąd pobierania danych. Ostatnia aktualizacja o " + dataTime;
           infoRow.setAttribute("class", "text-red-500 mr-2");
           setTimeout(() => {
             spin.setAttribute("class", "w-6 h-6 text-blue-600");
