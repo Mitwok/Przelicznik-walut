@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
           infoRow.setAttribute("class", "text-gray-400 mr-2");
           setTimeout(() => {
             spin.setAttribute("class", "w-6 h-6 text-blue-600");
-            updateButton.setAttribute("title", "update");
+            updateButton.setAttribute("title", "Zaktualizuj");
             updateButton.classList.remove("cursor-default");
           }, 1000);
           updateButtonStatus = true;
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
           infoRow.setAttribute("class", "text-red-500 mr-2");
           setTimeout(() => {
             spin.setAttribute("class", "w-6 h-6 text-blue-600");
-            updateButton.setAttribute("title", "update");
+            updateButton.setAttribute("title", "Zaktualizuj");
             updateButton.classList.remove("cursor-default");
           }, 1000);
           updateButtonStatus = true;
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
       exchangeRateUpdate();
       updatePlaceholder();
       spin.setAttribute("class", "animate-spin w-6 h-6 text-gray-400");
-      updateButton.setAttribute("title", "updating...");
+      updateButton.setAttribute("title", "Aktualizacja...");
       updateButton.classList.add("cursor-default");
       updateButtonStatus = false;
     }
