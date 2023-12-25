@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let exchangeRate = 0;
+  let exchangeRate = 1;
   let dataTime;
   let tableCurrency = {};
   let updateButtonStatus = true;
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
           updateButton.setAttribute("title", "Zaktualizuj");
           updateButton.classList.remove("cursor-default");
           updateButtonStatus = true;
-        }, 1000);
+        }, 450);
       });
   };
 
@@ -156,6 +156,20 @@ document.addEventListener("DOMContentLoaded", function () {
     receiveInputAction();
   });
 
+  const filterSelectors = () => {
+    receiveCurrencyValue = receiveCurrency.value;
+    giveCurrencyValue = giveCurrency.value;
+    for (let i = 0; i < giveCurrency.options.length; i++) {
+      const option = giveCurrency.options[i];
+      option.style.display =
+        option.value === receiveCurrencyValue ? "none" : "";
+    }
+    for (let i = 0; i < receiveCurrency.options.length; i++) {
+      const option = receiveCurrency.options[i];
+      option.style.display = option.value === giveCurrencyValue ? "none" : "";
+    }
+  };
+
   swapButton.addEventListener("click", function () {
     const newReceiveCurrency = giveCurrency.value;
     const newGiveCurrency = receiveCurrency.value;
@@ -167,11 +181,13 @@ document.addEventListener("DOMContentLoaded", function () {
       giveInputAction();
       giveToUpdate = false;
       updatePlaceholder();
+      filterSelectors();
     } else {
       receiveInput.value = giveInput.value;
       receiveInputAction();
       giveToUpdate = true;
       updatePlaceholder();
+      filterSelectors();
     }
   });
 
